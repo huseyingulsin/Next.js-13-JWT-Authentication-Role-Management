@@ -1,6 +1,6 @@
 import {jwtVerify} from 'jose'
 
-const getJwtSecretKey = () => {
+export const getJwtSecretKey = () => {
     const secretKey = process.env.JWT_SECRET_KEY;
 
 
@@ -20,3 +20,5 @@ export async function verifyJwtToken(token) {
         return null
     }
 } 
+
+export default {getJwtSecretKey}

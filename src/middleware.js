@@ -24,7 +24,10 @@ export  async function middleware(request) {
     }
 
     if(!hasVerifiedToken) {
-        return NextResponse.redirect(new URL('/login',url))
+        // where we are coming?: searchParams is a query string that we can use to redirect to the page we were trying to access
+        const searchParams = new URLSearchParams(nextUrl.searchParams);
+        searchParams.set('next',nextUrl.pathname)
+        return NextResponse.redirect(new URL(`/login?${searchParams}`,url))
     }
 
     return NextResponse.next();
@@ -33,7 +36,7 @@ export  async function middleware(request) {
 
 }
 
-// Path: src/middleware.js
+// we should define the URLS that we want to use the middleware in the following lines
 export const config = {
    matcher:['/panel']
 }
